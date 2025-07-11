@@ -1,30 +1,30 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { loginUser } from "./lib/auth";
+import { registerUser } from "../lib/auth";
 
-export default function LoginPage() {
+export default function RegisterPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
 
-  const handleLogin = () => {
-    const success = loginUser(username, password);
+  const handleRegister = () => {
+    const success = registerUser(username, password);
     if (success) {
-      alert("Login successful");
-      router.push("/main");
+      alert("Registered successfully!");
+      router.push("/");
     } else {
-      alert("Invalid credentials");
+      alert("Username already exists.");
     }
   };
 
   return (
     <div>
-      <h1>Login</h1>
+      <h1>Register</h1>
       <input placeholder="username" value={username} onChange={(e) => setUsername(e.target.value)} /><br /><br />
       <input type="password" placeholder="password" value={password} onChange={(e) => setPassword(e.target.value)} /><br /><br />
-      <button onClick={handleLogin}>Login</button><br /><br />
-      <button onClick={() => router.push("/register")}>Register</button>
+      <button onClick={handleRegister}>Register</button><br /><br />
+      <button onClick={() => router.push("/")}>Back to Login</button>
     </div>
   );
 }
